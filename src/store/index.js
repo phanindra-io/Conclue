@@ -8,12 +8,12 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null
-    },
+    }
   },
   getters: {
     user(state) {
       return state.user;
-    },
+    }
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -21,7 +21,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
-    },
+    }
   },
   actions: {
     async fetchUser({ commit }, user) {

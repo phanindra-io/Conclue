@@ -30,6 +30,17 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/clue/:cid",
+    name: "Clue",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "clue" */ "../views/Clue.vue"),
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 

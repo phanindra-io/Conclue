@@ -29,5 +29,6 @@ firebase.analytics();
 
 // firebase collections
 const usersCollection = db.collection("users");
+const cluesCollection = db.collection("clues");
 
-export { db, auth, firestore, usersCollection, functions };
+export { db, auth, firestore, usersCollection, cluesCollection, functions };
