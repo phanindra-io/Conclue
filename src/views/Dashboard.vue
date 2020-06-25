@@ -64,6 +64,7 @@ export default {
     async fetchClues() {
       const query = await cluesCollection
         .where("createdBy", "==", auth.currentUser.uid)
+        .where("head", "==", true)
         .get();
       for (let i = 0; i < query.docs.length; i++) {
         let data = query.docs[i].data();
@@ -74,7 +75,6 @@ export default {
     },
     saveClue() {
       this.rules.clue = [v => !!v || "Clue is required"];
-
       const self = this;
       setTimeout(async function() {
         if (self.$refs.clue_form.validate()) {
@@ -83,6 +83,7 @@ export default {
 
           let obj = {
             title: self.clue,
+            head: true,
             createdAt: new Date(),
             createdBy: auth.currentUser.uid
           };

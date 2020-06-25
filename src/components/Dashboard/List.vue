@@ -2,10 +2,17 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="10" md="8" class="py-0">
-        <v-card v-if="clues.length > 0" max-width="800" tile>
+        <div class="text-center" v-if="loading">
+          <v-progress-circular
+            :size="50"
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
+        </div>
+        <v-card v-else-if="clues.length > 0" max-width="800" tile>
           <v-list class="py-0">
             <template v-for="(item, index) in clues">
-              <v-list-item :key="index" @click="openClue(item)">
+              <v-list-item :key="index" @click="openClue(item.id)">
                 <v-list-item-content>
                   <v-list-item-title>
                     <v-flex class="d-flex justify-space-between">
@@ -31,23 +38,25 @@ export default {
   },
   data() {
     return {
-      loading: {
-        add: false
-      }
+      loading: true
     };
   },
   props: ["clues"],
   watch: {
-    //
+    clues: function(val) {
+      if (val) {
+        this.loading = false;
+      }
+    }
   },
   mounted() {
     //
   },
   methods: {
-    openClue(clue) {
+    openClue(cid) {
       this.$router.push({
         name: "Clue",
-        params: { cid: clue.id, clue: clue }
+        params: { cid: cid }
       });
     }
   },
