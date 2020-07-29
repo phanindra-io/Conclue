@@ -9,8 +9,8 @@
     </div>
     <div v-else>
       <v-row>
-        <v-col cols="12" md="10" offset-md="1">
-          <div class="text-center mb-6">
+        <v-col cols="12" md="10" offset-md="1" class="pb-0">
+          <v-flex class="d-flex justify-space-between mb-6">
             <v-btn
               class="mx-2"
               @click="$router.back()"
@@ -19,10 +19,16 @@
               small
               color="primary"
             >
-              <v-icon dark>mdi-arrow-up-thick</v-icon>
+              <v-icon dark>mdi-arrow-left-thick</v-icon>
             </v-btn>
-          </div>
+            <span class="mt-2">
+              Status:
+              <v-chip :color="getStatusColor(clue.status)" small>{{ getStatus(clue.status) }}</v-chip>
+            </span>
+          </v-flex>
+        </v-col>
 
+        <v-col cols="12" md="10" offset-md="1" class="pt-0">
           <v-card class="py-2" max-width="800">
             <p class="text-center mb-0">{{ clue.title }}</p>
           </v-card>
@@ -273,6 +279,28 @@ export default {
       this.clue[type][cid] = {
         title: title
       };
+    },
+
+    getStatus(status) {
+      switch(status) {
+        case 0:
+          return 'Ignored';
+        case 1:
+          return 'Feasible';
+        case 2:
+          return 'Infeasible';
+      }
+    },
+
+    getStatusColor(status) {
+      switch(status) {
+        case 0:
+          return 'dark';
+        case 1:
+          return 'success';
+        case 2:
+          return 'teal';
+      }
     }
   },
   beforeDestroy() {

@@ -84,6 +84,7 @@ export default {
           let obj = {
             title: self.clue,
             head: true,
+            status: 1,
             createdAt: new Date(),
             createdBy: auth.currentUser.uid
           };
